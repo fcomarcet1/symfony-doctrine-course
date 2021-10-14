@@ -8,7 +8,7 @@ services:
       args:
         UID: $U_ID
     ports:
-      - 1000:80
+      - "1000:80"
     volumes:
       - ./public:/appdata/www/public
     depends_on:
@@ -40,15 +40,34 @@ services:
     build:
       context: ./docker/database
     ports:
-      - 10000:3306
+      - "36000:3306"
     environment:
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: symfony-doctrine
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - codenip-sf-doctrine-db-data:/var/lib/mysql
     networks:
       - codenip-sf-doctrine-network
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+
+  codenip-sf-doctrine-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: codenip-sf-doctrine-phpmyadmin
+    restart: always
+    networks:
+      - codenip-sf-doctrine-network
+    ports:
+        - "1010:80"
+    environment:
+      # arbitrary server option - allowing you to specify any MySQL/MariaDB server on the login page
+      #- PMA_ARBITRARY=1
+      - PMA_HOST=codenip-sf-doctrine-db
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    depends_on:
+      - codenip-sf-doctrine-db
 
 volumes:
   codenip-sf-doctrine-db-data:
