@@ -10,20 +10,19 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211016080933 extends AbstractMigration
+final class Version20211016093024 extends AbstractMigration
 {
     public function getDescription(): string
     {
         return '';
     }
 
-    
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE users 
         (
-            id INT AUTO_INCREMENT NOT NULL, 
+            id CHAR(36) NOT NULL, 
             name VARCHAR(50) NOT NULL, 
             email CHAR(100) NOT NULL, 
             password VARCHAR(100) DEFAULT NULL, 
@@ -32,8 +31,8 @@ final class Version20211016080933 extends AbstractMigration
             INDEX idx_user_email (email), 
             UNIQUE INDEX uq_user_email (email), 
             PRIMARY KEY(id)
-        )
-         DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        ) 
+        DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
