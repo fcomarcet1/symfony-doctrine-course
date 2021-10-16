@@ -51,6 +51,20 @@ services:
     networks:
       - codenip-sf-doctrine-network
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+  
+  codenip-sf-doctrine-db-postgres:
+    image: postgres:13.3
+    container_name: "demo_uno_postgres"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - codenip-sf-doctrine-network
+    volumes:
+      - codenip-sf-doctrine-db-data-postgres:/var/lib/postgresql/data
 
   codenip-sf-doctrine-phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -71,6 +85,7 @@ services:
 
 volumes:
   codenip-sf-doctrine-db-data:
+  codenip-sf-doctrine-db-data-postgres:
 
 networks:
   codenip-sf-doctrine-network:

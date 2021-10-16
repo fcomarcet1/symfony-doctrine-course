@@ -37,5 +37,5 @@ RUN mkdir -p /appdata/www
 
 # Config XDEBUG
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-
+ 
 WORKDIR /appdata/www
