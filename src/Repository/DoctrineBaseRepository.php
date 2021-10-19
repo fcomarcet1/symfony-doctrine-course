@@ -31,7 +31,7 @@ abstract class DoctrineBaseRepository
 
     public function __construct(
         private ManagerRegistry $managerRegistry,
-        public Connection $connection
+        protected Connection $connection
     ) {
         $this->objectRepository = $this->getEntityManager()->getRepository($this->entityClass());
     }

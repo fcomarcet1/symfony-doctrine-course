@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
+use App\Repository\DoctrineBaseRepository;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-class UserRepository extends BaseRepository
+class DoctrineUserRepository extends DoctrineBaseRepository
 {
 
     protected static function entityClass(): string
