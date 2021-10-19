@@ -23,10 +23,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = Uuid::v4()->toRfc4122();
         $this->name = $name;
         $this->email = $email;
-        $this->password = 123456;
+        $this->password = '123456';
         $this->createdAt = new \DateTime();
         $this->markAsUpdated();
-
     }
 
      
