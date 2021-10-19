@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserRepository extends BaseRepository
 {
@@ -14,6 +15,14 @@ class UserRepository extends BaseRepository
     protected static function entityClass(): string
     {
         return User::class;
+    }
+
+    public function findOneById(string $id): ?User
+    {
+        if (null === $user = $this->objectRepository->find($id)) {
+            throw new HttpException(404, 'Somethig was wrong');
+        }
+        return $user;
     }
 
 
