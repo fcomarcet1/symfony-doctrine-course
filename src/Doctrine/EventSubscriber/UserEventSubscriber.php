@@ -29,6 +29,7 @@ class UserEventSubscriber implements EventSubscriber
         $entity = $args->getObject();
 
         if ($entity instanceof User) {
+            // tail -f var/log/dev.log
             $this->logger->info(\sprintf('User has been updated. New name: %s', $entity->getName()));
         }
     }
