@@ -14,9 +14,9 @@ use Doctrine\Persistence\Mapping\MappingException;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 
-abstract class BaseRepository
+abstract class DoctrineBaseRepository
 {
-    private ManagerRegistry $managerRegistry;
+    /* private ManagerRegistry $managerRegistry;
     protected Connection $connection;
     protected ObjectRepository $objectRepository;
 
@@ -25,6 +25,15 @@ abstract class BaseRepository
         $this->managerRegistry  = $managerRegistry;
         $this->connection       = $connection;
         $this->objectRepository = $this->getEntityManager()->getRepository($this->entityClass());
+    } */
+
+    protected ObjectRepository $objectRepository;
+
+    public function __construct(
+        private ManagerRegistry $managerRegistry,
+        public Connection $connection
+    ) {
+        $this->objectRepository = $this->getEntityManager()->getRepository($this->entityClass());
     }
 
     abstract protected static function entityClass(): string;
@@ -32,7 +41,17 @@ abstract class BaseRepository
     /**
      * @return ObjectManager|EntityManager
      */
-    public function getEntityManager()
+    /* public function getEntityManager()
+    {
+        $entityManager = $this->managerRegistry->getManager();
+
+        if ($entityManager->isOpen()) {
+            return $entityManager;
+        }
+
+        return $this->managerRegistry->resetManager();
+    } */
+    protected function getEntityManager(): EntityManager | ObjectManager
     {
         $entityManager = $this->managerRegistry->getManager();
 
