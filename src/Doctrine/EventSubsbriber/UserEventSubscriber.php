@@ -25,6 +25,7 @@ class UserEventSubscriber implements EventSubscriber
 
     public function preUpdate(LifecycleEventArgs $args): void
     {
+        // get entity
         $entity = $args->getObject();
 
         if ($entity instanceof User) {
