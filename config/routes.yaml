@@ -2,6 +2,11 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+app.user.get:
+    path: /api/users
+    controller: App\Controller\GetUsersAction
+    methods: [GET]
+
 app.user.create:
     path: /api/users
     controller: App\Controller\CreateUserAction
